@@ -15,7 +15,7 @@ Plus, we’ve got a **powerful Admin Module** that enables admins to view dispos
 
 ---
 
-## **II. How OOP Makes This Shine**  
+## **II. Application of OOP Principles**  
 
 We’ve harnessed the power of **Object-Oriented Programming (OOP)** to make this system modular, reusable, and a breeze to maintain! Here’s how:  
 
