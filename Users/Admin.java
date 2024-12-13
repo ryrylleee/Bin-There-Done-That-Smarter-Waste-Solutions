@@ -1,6 +1,7 @@
 package Users;
 
 import Main.Main;
+import static Main.Main.sleep;
 import Main.WasteManagementSystem;
 import java.util.Scanner;
 
@@ -64,9 +65,11 @@ public class Admin {
             switch (adminChoice) {
                 case 1:
                     system.displayDisposalLog();
+                    sleep(5000);
                     break;
                 case 2:
                     userSystem.displayUsers();
+                    sleep(5000);
                     break;
                 case 3:
                     Main.displayHeader();
