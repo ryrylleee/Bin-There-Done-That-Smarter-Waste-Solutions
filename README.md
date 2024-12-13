@@ -87,7 +87,7 @@ By categorizing waste and offering eco-friendly tips, this system promotes habit
 3. **Admin Management**: Admins can peek into the waste logs and check on users.
 
 ---
-🎉 Thank you for using **"Bin There, Done That!"** to make waste management fun and impactful. Together, let’s keep our planet clean and green. 🌟
+🎉 Thank you for using **"Bin There, Done That!"** to make waste management fun and impactful. Together, let’s continue to make a difference. :)🌟
 ---
 
 # About the Author
