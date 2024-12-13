@@ -72,10 +72,10 @@ BIN-THERE-DONE-THAT
     ```bash
     java Main.Main
     ```
+
 ---
-
 ### 2. Menu Options  
-
+---
 #### **Main Menu**
 - **Register (User)**: Create a new user account.  
 - **Login (User)**: Access waste management functionalities.  
@@ -116,7 +116,7 @@ Handles the core application flow, displaying menus, and managing user interacti
 
 ---
 ## Future Improvements  
-
+---
 - **Graphical User Interface (GUI)** for enhanced user experience.  
 - Integration with a database for persistent storage of users and logs.  
 - Machine learning to improve waste categorization.  
@@ -124,9 +124,6 @@ Handles the core application flow, displaying menus, and managing user interacti
 
 ---
 ## Authors  
-
+---
 - [Your Name or Team Name]
  
---- 
-
-Feel free to modify this README based on your project’s needs! Let me know if you'd like me to include more details or tweak any section. 😊
