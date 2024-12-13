@@ -77,6 +77,7 @@ public class Main {
                         isAdmin = false;
                         System.out.println("=========================================================================");
                         System.out.println("\t\tYou are now logged in!");
+                        System.out.println("=========================================================================");
                         sleep(1000);
                     }
                     break;
@@ -86,6 +87,7 @@ public class Main {
                         isAdmin = true;
                         System.out.println("=========================================================================");
                         System.out.println("\t\tAdmin login successful! Welcome, Admin!");
+                        System.out.println("=========================================================================");
                         sleep(1000);
                     }
                     break;
@@ -95,11 +97,13 @@ public class Main {
                     displayHeader();
                     System.out.println("=========================================================================");
                     System.out.println("\t\t\tExiting the system. Goodbye!");
+                    System.out.println("=========================================================================");
                     scanner.close();
                     return;
                 default:
                     System.out.println("=========================================================================");
                     System.out.println("\t\tInvalid option. Please try again.");
+                    System.out.println("=========================================================================");
                     sleep(1000);
             }
         }
@@ -122,14 +126,16 @@ public class Main {
             clearScreen();
             displayHeader();
             System.out.println("=========================================================================");
-            System.out.println("\nDo you want to restart the program? (yes/no): ");
+            System.out.println("\tDo you want to restart the program? (yes/no): ");
+            System.out.println("=========================================================================");
             String restartChoice = scanner.nextLine().toLowerCase();
 
             if (!restartChoice.equals("yes")) {
                 clearScreen();
                 displayHeader();
                 System.out.println("=========================================================================");
-                System.out.println("\tThank you for using Bin There, Done That! Goodbye!");
+                System.out.println("\tThank you for using Bin There, Done That! \n\tContinue making a difference! \n\t\tGoodbye!");
+                System.out.println("=========================================================================");
                 break;
             }
         }

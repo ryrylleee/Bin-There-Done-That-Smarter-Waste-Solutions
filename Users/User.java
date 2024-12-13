@@ -107,7 +107,6 @@ public class User {
                 System.out.println("=========================================================================");
                 System.out.println("You are disposing of a " + wasteItem.getClass().getSimpleName() + " item.");
                 wasteItem.processWaste();
-                System.out.println(wasteItem.getEcoFriendlyTip());
                 System.out.println("=========================================================================");
                 System.out.println("Would you like to log this disposal for environmental impact tracking? (yes/no): ");
                 System.out.println("=========================================================================");
@@ -129,7 +128,8 @@ public class User {
             String tipChoice = scanner.nextLine().toLowerCase();
 
             if (tipChoice.equals("yes")) {
-                System.out.println(wasteItem.getEcoFriendlyTip());  // Ensure the method exists
+                System.out.println(wasteItem.getEcoFriendlyTip());
+                Main.sleep(5000);
             }
         }
     }
