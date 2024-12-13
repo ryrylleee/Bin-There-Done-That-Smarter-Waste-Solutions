@@ -97,7 +97,7 @@ Your project directory should look like this:
 
 ---
 
-💡 **Pro Tip**: Stick around for eco-friendly tips and make waste disposal fun! Your small actions can lead to a big impact. 🌟  
+💡 **Pro Tip**: Stick around for eco-friendly tips and make waste disposal fun! Continue to make a difference :) 🌟  
 
 ---
 # About the Author
