@@ -1,136 +1,114 @@
 package Users;
 
 import Main.Main;
+import static Main.Main.sleep;
 import Main.WasteManagementSystem;
 import Waste.Waste;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class User {
-    private HashMap<String, String> users;
-
-    public User() {
-        users = new HashMap<>();
-        users.put("user1", "password1"); //default user
-    }
-
-    private void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
+    private String username;
+    private String password;
+    
+    private static final HashMap<String, String> registeredUsers = new HashMap<>();
 
     public void register(Scanner scanner) {
-        clearScreen();
         Main.displayHeader();
         System.out.println("=========================================================================");
         System.out.println("\t\t\tUser Registration");
         System.out.println("=========================================================================");
-        System.out.print("\t\t\tEnter a new username: ");
-        String username = scanner.nextLine();
-
-        if (users.containsKey(username)) {
-            System.out.println("=========================================================================");
-            System.out.println("\t\tUsername already exists. Try a different one.");
-            return;
-        }
-
-        System.out.print("\t\t\tEnter a new password: ");
-        String password = scanner.nextLine();
-
-        users.put(username, password); 
-        Main.displayHeader();
+        System.out.print("\t\t\tEnter a username: ");
+        this.username = scanner.nextLine();
+        System.out.print("\t\t\tEnter a password: ");
+        this.password = scanner.nextLine();
+        
+        registeredUsers.put(username, password);
+        
         System.out.println("=========================================================================");
-        System.out.println("\t\tRegistration successful! You can now log in.");
+        System.out.println("\t\tRegistration successful for " + username + "!");
         System.out.println("=========================================================================");
     }
 
+    // Login Method for User
     public boolean login(Scanner scanner) {
-        clearScreen();
         Main.displayHeader();
         System.out.println("=========================================================================");
-        System.out.println("\t\t\t\tUser Login");
+        System.out.println("\t\t\tUser Login:");
         System.out.println("=========================================================================");
-        System.out.print("\t\t\tEnter your username: ");
-        String username = scanner.nextLine();
-        System.out.print("\t\t\tEnter your password: ");
-        String password = scanner.nextLine();
+        System.out.print("\t\t\tEnter username: ");
+        this.username = scanner.nextLine();
+        System.out.print("\t\t\tEnter password: ");
+        this.password = scanner.nextLine();
         System.out.println("=========================================================================");
-
-        if (users.containsKey(username) && users.get(username).equals(password)) {
-            Main.displayHeader();
-            System.out.println("=========================================================================");
-            System.out.println("\t\tLogin successful! Welcome, " + username + "!");
-            System.out.println("=========================================================================");
-            return true;
-        } else {
-            System.out.println("=========================================================================");
-            System.out.println("\t\tInvalid username or password. Please try again.");
-            System.out.println("=========================================================================");
-            return false;
-        }
-    }
-
-    public void displayUsers() {
-        clearScreen();
-        Main.displayHeader();
-        System.out.println("=========================================================================");
-        System.out.println("\t\t\t♻ Registered Users ♻");
-        System.out.println("=========================================================================");
-        if (users.isEmpty()) {
-            System.out.println("\t\tNo users have registered yet.");
-        } else {
-            for (String username : users.keySet()) {
-                System.out.println("\t\t- " + username);
-            }
-        }
-        System.out.println("=========================================================================");
+        return true;
     }
 
     public void interactWithWasteManagement(Scanner scanner, WasteManagementSystem system) {
-        boolean running = true;
-
-        while (running) {
+        boolean exit = false;
+        while (!exit) {
             Main.displayHeader();
             System.out.println("=========================================================================");
-            System.out.println("\tEnter the item you want to dispose of (or type 'exit' to quit): ");
+            System.out.println("\t\t\t\tUser Menu");
             System.out.println("=========================================================================");
-            String itemName = scanner.nextLine().toLowerCase();
-
-            if (itemName.equals("exit")) {
-                running = false;
-                break;
+            System.out.println("\t\t1. Dispose of Waste");
+            System.out.println("\t\t2. View Disposal Log");
+            System.out.println("\t\t3. Exit");
+            System.out.println("=========================================================================");
+            System.out.print("\t\tChoose an option: ");
+            int choice;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("=========================================================================");
+                System.out.println("\t\tInvalid input. Please enter a number.");
+                System.out.println("=========================================================================");
+                continue;
             }
 
-            Waste wasteItem = system.categorizeWaste(itemName);
-
-            if (wasteItem != null) {
-                System.out.println("=========================================================================");
-                System.out.println("You are disposing of a " + wasteItem.getClass().getSimpleName() + " item.");
-                wasteItem.processWaste();
-                System.out.println("=========================================================================");
-                System.out.println("Would you like to log this disposal for environmental impact tracking? (yes/no): ");
-                System.out.println("=========================================================================");
-                String trackChoice = scanner.nextLine().toLowerCase();
-
-                if (trackChoice.equals("yes")) {
-                    system.logDisposal(wasteItem);
-                }
-            } else {
-                Main.displayHeader();
-                System.out.println("=========================================================================");
-                System.out.println("Sorry, the item '" + itemName + "' is not recognized in our waste categories.");
-                System.out.println("=========================================================================");
-            }
-
-            System.out.println("=========================================================================");
-            System.out.println("\t\tWould you like an eco-friendly tip? (yes/no): ");
-            System.out.println("=========================================================================");
-            String tipChoice = scanner.nextLine().toLowerCase();
-
-            if (tipChoice.equals("yes")) {
-                System.out.println(wasteItem.getEcoFriendlyTip());
-                Main.sleep(5000);
+            switch (choice) {
+                case 1:
+                    System.out.print("\t\tEnter the waste item to dispose of: ");
+                    String wasteName = scanner.nextLine();
+                    Waste waste = system.categorizeWaste(wasteName);
+                    if (waste != null) {
+                        system.logDisposal(waste);
+                        sleep(5000);
+                    } else {
+                        System.out.println("=========================================================================");
+                        System.out.println("\t\tUnable to categorize this item.");
+                        System.out.println("=========================================================================");
+                    }
+                    break;
+                case 2:
+                    system.displayDisposalLog();
+                    sleep(5000);
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("=========================================================================");
+                    System.out.println("\t\tInvalid option. Please try again.");
+                    System.out.println("=========================================================================");
             }
         }
+    }
+    public void displayUsers() {
+        if (registeredUsers.isEmpty()) {
+            Main.displayHeader();
+            System.out.println("=========================================================================");
+            System.out.println("\t\tNo users are currently registered.");
+            System.out.println("=========================================================================");
+            return;
+        }
+        Main.displayHeader();
+        System.out.println("=========================================================================");
+        System.out.println("\t\t\tList of Registered Users:");
+        System.out.println("=========================================================================");
+        for (String user : registeredUsers.keySet()) {
+            System.out.println("\t\t- " + user);
+        }
+        System.out.println("=========================================================================");
     }
 }
