@@ -76,7 +76,7 @@ public class Main {
                         authenticated = true;
                         isAdmin = false;
                         System.out.println("=========================================================================");
-                        System.out.println("\t\tYou are now logged in!");
+                        System.out.println("\t\t\tYou are now logged in!");
                         System.out.println("=========================================================================");
                         sleep(1000);
                     }
@@ -85,9 +85,6 @@ public class Main {
                     if (adminSystem.login(scanner)) {
                         authenticated = true;
                         isAdmin = true;
-                        System.out.println("=========================================================================");
-                        System.out.println("\t\tAdmin login successful! Welcome, Admin!");
-                        System.out.println("=========================================================================");
                         sleep(1000);
                     }
                     break;
@@ -115,18 +112,17 @@ public class Main {
         }
     }
 
-    // Main Entry Point
     public static void main(String[] args) {
         User userSystem = new User();
         Admin adminSystem = new Admin();
         WasteManagementSystem system = new WasteManagementSystem();
 
-        while (true) { // Loop to allow restarting the program
-            mainMenu(userSystem, adminSystem, system);
+        while (true) {
+            mainMenu(userSystem, adminSystem, system); // This will go back to the main menu after each session
             clearScreen();
             displayHeader();
             System.out.println("=========================================================================");
-            System.out.println("\tDo you want to restart the program? (yes/no): ");
+            System.out.println("\tDo you want to go back to the main menu? (yes/no): ");
             System.out.println("=========================================================================");
             String restartChoice = scanner.nextLine().toLowerCase();
 
