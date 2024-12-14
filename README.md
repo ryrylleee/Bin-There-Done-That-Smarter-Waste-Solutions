@@ -89,7 +89,3 @@ By categorizing waste and offering eco-friendly tips, this system promotes habit
 ---
 🎉 Thank you for using **"Bin There, Done That!"** to make waste management fun and impactful. Together, let’s continue to make a difference. :)🌟
 ---
-
-# About the Author
---- 
-- Hi, I'm Karylle.
