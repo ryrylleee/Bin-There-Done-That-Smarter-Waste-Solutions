@@ -58,37 +58,17 @@ By categorizing waste and offering eco-friendly tips, this system promotes habit
    java Main.Main
    ```
 
-### User Guide
+4. **Explore the System**  
+   - **Users**: Register, log in, and start categorizing waste.  
+   - **Admins**: Log in to view disposal logs and manage users.  
 
-- 🏠 **Main Menu**:
-  - Register as a new user.
-  - Log in as a user or admin.
-  - Exit the program.
-
-- 🧑‍💻 **User Features**:
-  - Log waste items for proper disposal.
-  - View your waste disposal history.
-
-- 🛠️ **Admin Features**:
-  - Monitor registered users.
-  - Access the waste disposal log.
-
-### Notes
-
-- Proper input ensures smooth operation – no typos, please! 😄
-- Admin credentials (shh, don’t tell anyone!):
-  - Username: `admin`
-  - Password: `admin123`
-
-### Example Interaction
-
-1. **Register/Login**: Sign up and log in to explore the features.
-2. **Dispose Waste**: Input items like "plastic bottle" or "banana peel" to see them categorized and logged.
-3. **Admin Management**: Admins can peek into the waste logs and check on users.
+5. **Exit Gracefully**  
+   Type "exit" from the Main Menu when you’re ready to wrap up.  
 
 ---
-🎉 Thank you for using **"Bin There, Done That!"** to make waste management fun and impactful. Together, let’s keep our planet clean and green. 🌟
+
+💡 **Pro Tip**: Stick around for eco-friendly tips and make waste disposal fun! Continue to make a difference :) 🌟  
+
 ---
 # About the Author
---- 
-
+- Hi, I'm Karylle. 
