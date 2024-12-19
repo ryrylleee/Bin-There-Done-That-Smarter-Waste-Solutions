@@ -68,7 +68,3 @@ By categorizing waste and offering eco-friendly tips, this system promotes habit
 ---
 
 💡 **Pro Tip**: Stick around for eco-friendly tips and make waste disposal fun! Continue to make a difference :) 🌟  
-
----
-# About the Author
-- Hi, I'm Karylle. 
