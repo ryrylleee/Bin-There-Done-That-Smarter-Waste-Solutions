@@ -120,14 +120,14 @@ public class Main {
             Admin adminSystem = new Admin();
             WasteManagementSystem system = new WasteManagementSystem();
 
-        while (true) { // Loop to allow restarting the program
-            mainMenu(userSystem, adminSystem, system);
-            clearScreen();
-            displayHeader();
-            System.out.println("=========================================================================");
-            System.out.println("\tDo you want to restart the program? (yes/no): ");
-            System.out.println("=========================================================================");
-            String restartChoice = scanner.nextLine().toLowerCase();
+            while (true) {
+                mainMenu(userSystem, adminSystem, system, conn);
+                clearScreen();
+                displayHeader();
+                System.out.println("=========================================================================");
+                System.out.println("\tDo you want to go back to the main menu? (yes/no): ");
+                System.out.println("=========================================================================");
+                String restartChoice = scanner.nextLine().toLowerCase();
 
                 if (!restartChoice.equals("yes")) {
                     clearScreen();
