@@ -3,6 +3,7 @@ package Users;
 import Main.Main;
 import Main.WasteManagementSystem;
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class Admin {
     private final String adminUsername = "admin";

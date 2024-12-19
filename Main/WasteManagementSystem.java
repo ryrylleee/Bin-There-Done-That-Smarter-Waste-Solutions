@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class WasteManagementSystem {
     private final List<String> disposalLog;
-    private final Scanner scanner; 
+    private final Scanner scanner;
 
     public WasteManagementSystem() {
         this.disposalLog = new ArrayList<>();
@@ -38,6 +38,8 @@ public class WasteManagementSystem {
         disposalLog.add(wasteItem.getName());
         Main.displayHeader();
         System.out.println("\tItem \"" + wasteItem.getName() + "\" has been added to your disposal log.");
+        wasteItem.processWaste();
+        wasteItem.getEcoFriendlyTip();
     }
 
     public void displayDisposalLog() {
