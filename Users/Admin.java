@@ -1,9 +1,14 @@
 package Users;
 
 import Main.Main;
+import static Main.Main.sleep;
 import Main.WasteManagementSystem;
+import Utilities.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.HashMap;
 
 public class Admin {
     private final String adminUsername = "admin";
@@ -41,7 +46,7 @@ public class Admin {
         }
     }
 
-    public void manageSystem(Scanner scanner, WasteManagementSystem system, User userSystem) {
+    public void manageSystem(Scanner scanner, WasteManagementSystem system) {
         while (true) {
             Main.displayHeader();
             System.out.println("\t\t\tAdmin Menu:");
@@ -65,9 +70,11 @@ public class Admin {
             switch (adminChoice) {
                 case 1:
                     system.displayDisposalLog();
+                    sleep(5000);
                     break;
                 case 2:
-                    userSystem.displayUsers();
+                    displayRegisteredUsers();
+                    sleep(5000);
                     break;
                 case 3:
                     Main.displayHeader();
@@ -81,5 +88,37 @@ public class Admin {
                     System.out.println("=========================================================================");
             }
         }
+    }
+    
+    private void displayRegisteredUsers() {
+        clearScreen();
+        Main.displayHeader();
+        System.out.println("=========================================================================");
+        System.out.println("\t\t\tRegistered Users");
+        System.out.println("=========================================================================");
+
+        try (Connection conn = DatabaseConnection.connect()) {
+            String query = "SELECT username, date_registered FROM users";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            boolean hasUsers = false;
+            while (rs.next()) {
+                hasUsers = true;
+                String username = rs.getString("username");
+                String dateRegistered = rs.getString("date_registered");
+
+                System.out.println("\tUsername: " + username + " | Registered On: " + dateRegistered);
+            }
+
+            if (!hasUsers) {
+                System.out.println("\t\tNo registered users found.");
+            }
+        } catch (SQLException e) {
+            System.out.println("\tError fetching registered users.");
+            e.printStackTrace();
+        }
+
+        System.out.println("=========================================================================");
     }
 }

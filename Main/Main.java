@@ -2,6 +2,8 @@ package Main;
 
 import Users.Admin;
 import Users.User;
+import Utilities.DatabaseConnection;
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class Main {
@@ -40,7 +42,7 @@ public class Main {
         System.out.println("                                                                     ");
     }
 
-    public static void mainMenu(User userSystem, Admin adminSystem, WasteManagementSystem system) {
+    public static void mainMenu(User userSystem, Admin adminSystem, WasteManagementSystem system, Connection conn) {
         boolean authenticated = false;
         boolean isAdmin = false;
 
@@ -69,14 +71,14 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    userSystem.register(scanner);
+                    userSystem.register(scanner, conn);
                     break;
                 case 2:
-                    if (userSystem.login(scanner)) {
+                    if (userSystem.login(scanner, conn)) {
                         authenticated = true;
                         isAdmin = false;
                         System.out.println("=========================================================================");
-                        System.out.println("\t\tYou are now logged in!");
+                        System.out.println("\t\t\tYou are now logged in!");
                         System.out.println("=========================================================================");
                         sleep(1000);
                     }
@@ -85,9 +87,6 @@ public class Main {
                     if (adminSystem.login(scanner)) {
                         authenticated = true;
                         isAdmin = true;
-                        System.out.println("=========================================================================");
-                        System.out.println("\t\tAdmin login successful! Welcome, Admin!");
-                        System.out.println("=========================================================================");
                         sleep(1000);
                     }
                     break;
@@ -109,35 +108,38 @@ public class Main {
         }
 
         if (isAdmin) {
-            adminSystem.manageSystem(scanner, system, userSystem);
+            adminSystem.manageSystem(scanner, system);
         } else {
             userSystem.interactWithWasteManagement(scanner, system);
         }
     }
 
-    // Main Entry Point
     public static void main(String[] args) {
-        User userSystem = new User();
-        Admin adminSystem = new Admin();
-        WasteManagementSystem system = new WasteManagementSystem();
+        try (Connection conn = DatabaseConnection.connect()) {
+            User userSystem = new User();
+            Admin adminSystem = new Admin();
+            WasteManagementSystem system = new WasteManagementSystem();
 
-        while (true) { // Loop to allow restarting the program
-            mainMenu(userSystem, adminSystem, system);
-            clearScreen();
-            displayHeader();
-            System.out.println("=========================================================================");
-            System.out.println("\tDo you want to restart the program? (yes/no): ");
-            System.out.println("=========================================================================");
-            String restartChoice = scanner.nextLine().toLowerCase();
-
-            if (!restartChoice.equals("yes")) {
+            while (true) {
+                mainMenu(userSystem, adminSystem, system, conn);
                 clearScreen();
                 displayHeader();
                 System.out.println("=========================================================================");
-                System.out.println("\tThank you for using Bin There, Done That! \n\tContinue making a difference! \n\t\tGoodbye!");
+                System.out.println("\tDo you want to go back to the main menu? (yes/no): ");
                 System.out.println("=========================================================================");
-                break;
+                String restartChoice = scanner.nextLine().toLowerCase();
+
+                if (!restartChoice.equals("yes")) {
+                    clearScreen();
+                    displayHeader();
+                    System.out.println("=========================================================================");
+                    System.out.println("\tThank you for using Bin There, Done That! \n\tContinue making a difference! \n\t\tGoodbye!");
+                    System.out.println("=========================================================================");
+                    break;
+                }
             }
+        } catch (Exception e) {
+            System.err.println("Error connecting to the database: " + e.getMessage());
         }
         scanner.close();
     }
